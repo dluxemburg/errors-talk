@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>It's Handled...OR IS IT!?</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>It's Handled..<em>Or Is It!?</em></h2>
+          <h4>(The right tool for the way<br>the job will probably go wrong)</h4>
+          <p>
+            <small><a href="http://dluxemburg.com">Daniel Luxemburg</a> / <a href="http://twitter.com/dluxemburg">@dluxemburg</a></small>
+          </p>
+          <aside class="notes">
+- Going to talk about errors and how to handle them with particular attention about how the asynchronous nature of JavaScript makes that hard (or at least more complicated that it might be in other language)
+- Going to use Node for examples and talk about a lot of its behavior specifically, but the conclusions should apply for the Browser and elsewhere too
+- Going to stick with what ships with Node. There are a lot of libraries and stuff for this, but that's a lot more than 10 minutes worth of stuff.
+          </aside>
+        </section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/does-not-exist.js"
+          data-diff-from="read-file/async/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/say-hello.js"
+          data-diff-from="read-file/async/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/say-does-not-exist.js"
+          data-diff-from="read-file/async/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/sync/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/sync/say-does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/does-not-exist-plus-math.js"
+          data-diff-from="read-file/async/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/sync/does-not-exist-plus-math.js"
+          data-diff-from="read-file/sync/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/does-not-exist-rethrow.js"
+          data-diff-from="read-file/async/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/async/hello-hi.js"
+          data-language="javascript"
+        ></section>
+
+        <section class="report">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Callbacks</th>
+                <th class="hidden">Promises</th>
+                <th class="hidden">Events</th>
+                <th class="hidden">Streams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Good errors?</th>
+                <td><span class="fragment">❌</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Loud Failures?</th>
+                <td><span class="fragment">❌</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Composable?</th>
+                <td><span class="fragment">❌</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Simple?</th>
+                <td><span class="fragment">✅</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+- We've got callbacks as a way to handle errors that come out of asynchronous behavior
+- ...but they've got these problems with silence and _seemingly_ inaccurate messages
+- ...they're also not composable, resulting in redundant handling
+- ..._but_ they're pretty simple to reason about and pretty fundamental to Node's style
+          </aside>
+        </section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/example.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/chained-example.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/read-file.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist.js"
+          data-diff-from="read-file/promise/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist-rethrow.js"
+          data-diff-from="read-file/promise/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist-log.js"
+          data-diff-from="read-file/promise/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist-double-catch.js"
+          data-diff-from="read-file/promise/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/olleh.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist-unhandled-rejection.js"
+          data-diff-from="read-file/promise/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/browser-unhandledrejection.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/does-not-exist-timed-rethrow.js"
+          data-diff-from="read-file/promise/does-not-exist-rethrow.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/promise/hello-hi.js"
+          data-language="javascript"
+        ></section>
+
+        <section class="report">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Callbacks</th>
+                <th>Promises</th>
+                <th class="hidden">Events</th>
+                <th class="hidden">Streams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Good errors?</th>
+                <td>❌</td>
+                <td><span class="fragment">✅</span></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Loud Failures?</th>
+                <td>❌</td>
+                <td><span class="fragment">❌</span></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Composable?</th>
+                <td>❌</td>
+                <td><span class="fragment">✅</span></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Simple?</th>
+                <td>✅</td>
+                <td><span class="fragment">❓</span></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+- As compared with callbacks...
+- ...promises give us better errors because they fail us into a "`catch`" block directly instead of letting us wander off to try to do something else in an unexpected state
+- ...but they've still got issues with failing silently unless we're proactive about handling (the global handler isn't really a solution because if your code is being used by someone else they might have their own ideas about what to do at the top level, better to keep things local)
+- ...but they're nicely composable!
+- ...any they're _pretty_ easy to reason about?
+          </aside>
+        </section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/example.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/file-reader.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/does-not-exist.js"
+          data-diff-from="read-file/events/hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/does-not-exist-handled.js"
+          data-diff-from="read-file/events/does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/olleh.js"
+          data-diff-from="read-file/events/does-not-exist-handled.js"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/events/hello-hi.js"
+          data-language="javascript"
+        ></section>
+
+        <section class="report">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Callbacks</th>
+                <th>Promises</th>
+                <th>Events</th>
+                <th class="hidden">Streams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Good errors?</th>
+                <td>❌</td>
+                <td>✅</td>
+                <td><span class="fragment">✅</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Loud Failures?</th>
+                <td>❌</td>
+                <td>❌</td>
+                <td><span class="fragment">✅</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Composable?</th>
+                <td>❌</td>
+                <td>✅</td>
+                <td><span class="fragment">❌</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Simple?</th>
+                <td>✅</td>
+                <td>❓</td>
+                <td><span class="fragment">❓</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <aside class="notes">
+- So events...
+- ...also give us better errors because, like promises, we're immediately bounced into targeted error handling code
+- ...but unlike promises, if that's not there the error automatically jumps up to the global context so it can't be ignored
+- ...but they're not composable in the way promises are
+- ...and while they might be pretty simple once in place, we do have to do some work to write them up that's a bit more involved than with promises, especially in more complicated cases
+          </aside>
+        </section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/hello-event.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/does-not-exist-event.js"
+          data-diff-from="read-file/stream/hello-event.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/hello-pipe.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/does-not-exist-pipe-plus-math.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/does-not-exist-pipe-log.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/hello-transform.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/olleh.js"
+          data-diff-from="read-file/stream/hello-transform.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/stream/hello-transform-handled-error.js"
+          data-diff-from="read-file/stream/hello-transform.js"
+          data-language="javascript"
+        ></section>
+
+        <section class="report">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Callbacks</th>
+                <th>Promises</th>
+                <th>Events</th>
+                <th>Streams</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Good errors?</th>
+                <td>❌</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td><span class="fragment">✅</span></td>
+              </tr>
+              <tr>
+                <th>Loud Failures?</th>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✅</td>
+                <td><span class="fragment">✅</span></td>
+              </tr>
+              <tr>
+                <th>Composable?</th>
+                <td>❌</td>
+                <td>✅</td>
+                <td>❌</td>
+                <td><span class="fragment">❓</span></td>
+              </tr>
+              <tr>
+                <th>Simple?</th>
+                <td>✅</td>
+                <td>❓</td>
+                <td>❓</td>
+                <td><span class="fragment">❌</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <aside class="notes">
+- So streams...
+- ...also give us better errors, for the same reason as events
+- ...also give us loud errors, for the same reason as events
+- ...but they're composable in a way that events are not, but only in cases when we're working with other streams and maybe not as much as promises
+- ...and they're probably more complicated than events and while not too difficult to reason about, probably the most difficult of the ones we've looked at
+          </aside>
+        </section>
+
+        <section class="conclusion">
+          <h2>So...</h2>
+          <ul>
+            <li class="fragment">
+              <strong><span class="blue">Callbacks:</span> Most adaptable</strong>—good when errors will need different handling depending on context, e.g. library code
+              <ul><li>(Don't use `-Sync` methods)</li></ul>
+            </li>
+            <br>
+            <li class="fragment">
+              <strong><span class="blue">Promises:</span> Most composable</strong>—good when errors from a sequence of steps should/can be handled in aggregate, e.g. application business logic
+              <ul><li>(Don't use global handler)</li></ul>
+            </li>
+          </ul>
+        </section>
+        <section class="conclusion">
+          <h2>And then but so...</h2>
+          <ul>
+            <li class="fragment">
+              <strong><span class="blue">Events:</span> Most loud</strong>—good when errors in one component need to notify another and should crash if unhandled, e.g. a web server
+            </li>
+            <br>
+            <li class="fragment">
+              <strong><span class="blue">Streams:</span> Most niche</strong>—good in similar cases as events, but when errors should be propogated through steps in a pipeline
+            </li>
+          </ul>
+        </section>
+
+        <section><h1>Maybe?</h1></section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="node_modules/diff/dist/diff.js"></script>
+
+    <script>
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'none',
+
+        dependencies: [
+          { src: 'plugin/run-in-terminal.js', async: true },
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }        ]
+      });
+    </script>
+  </body>
+</html>
