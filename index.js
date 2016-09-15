@@ -19,12 +19,14 @@ app.get('/execute', (req, res) => {
     });
   });
 
-  ps.on('exit', () => {
+  ps.on('exit', (exit) => {
+    console.log(`${ps.pid}: ${ps.spawnargs.join(' ')} (${exit})`);
     res.write(`event: done\ndata: done\n\n`);
     res.end();
   });
 });
 
+app.use(express.static('.'));
 app.use(express.static('app'));
 app.use(express.static('node_modules/reveal.js'));
 

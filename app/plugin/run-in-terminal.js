@@ -1,4 +1,6 @@
 const NOTES_REGEX = /^\/\*=notes$\n([\s\S]*)^\*\/$/m;
+const TITLE_REGEX = /^\/\*=title:(.*)\*\/$/m;
+
 
 class CommandRunner {
   static run(command, fn) {
@@ -47,8 +49,8 @@ class RunInTerminalSlide {
     this.container.classList.add('container');
     this.section.appendChild(this.container);
 
-    this.addElement('filename', {tagName: 'em', parent: 'container'});
-    this.filename.innerText = this.property('src');
+    this.addElement('title', {tagName: 'span', parent: 'container'});
+    this.title.innerText = this.property('src');
 
     ['code', 'term'].forEach(name => this.addElement(name, {
       tagName: 'pre',
@@ -75,12 +77,15 @@ class RunInTerminalSlide {
   loadCode() {
     this.section.style.display = 'none';
     this.promisedCode
-      .then(codeWithNotes => {
-        this.code.innerText = codeWithNotes.code;
-
-        if (codeWithNotes.notes) {
+      .then(slideData => {
+        this.code.innerText = slideData.code;
+        if (slideData.notes) {
           this.addElement('notes', {tagName: 'aside'});
-          this.notes.innerHTML = codeWithNotes.notes;
+          this.notes.innerHTML = slideData.notes;
+        }
+
+        if (slideData.title) {
+          this.title.innerHTML = marked(slideData.title);
         }
       })
       .then(() => hljs.highlightBlock(this.code))
@@ -93,8 +98,8 @@ class RunInTerminalSlide {
       })
       .then(() => {
         this.code.innerHTML = this.code.innerHTML
-          .replace(/\/\*runInTerminalAddStart\*\//g, '<span class="added">')
-          .replace(/\/\*runInTerminalAddEnd\*\//g, '</span>')
+          .replace(/\|\*runInTerminalAddStart\*\|/g, '<span class="added">')
+          .replace(/\|\*runInTerminalAddEnd\*\|/g, '</span>')
       })
       .then(() => this.renderPrompt())
       .then(() => this.section.style.display = 'block');
@@ -162,20 +167,23 @@ class RunInTerminalSlide {
       .then(resolved => {
         return resolved.map(text => {
           let notes = text.match(NOTES_REGEX);
+          let title = text.match(TITLE_REGEX);
+          let code = text.replace(NOTES_REGEX, '').replace(TITLE_REGEX, '');
           return {
             notes: notes ? notes[1] : null,
-            code: `${text.replace(NOTES_REGEX, '').trim()}\n`
+            title: title ? title[1] : null,
+            code: `${code.trim()}\n`
           }
         });
-      }).then(codeWithNotes => {
-        if (codeWithNotes.length === 1) return codeWithNotes[0];
+      }).then(sildeData => {
+        if (sildeData.length === 1) return sildeData[0];
 
-        let code = JsDiff.diffWords(codeWithNotes[1].code, codeWithNotes[0].code)
+        let code = JsDiff.diffWords(sildeData[1].code, sildeData[0].code)
           .filter(words => !words.removed)
-          .map(words => words.added ? `/*runInTerminalAddStart*/${words.value}/*runInTerminalAddEnd*/` : words.value)
+          .map(words => words.added ? `|*runInTerminalAddStart*|${words.value}|*runInTerminalAddEnd*|` : words.value)
           .join('');
 
-        return {code: code, notes: codeWithNotes[0].notes};
+        return {code, notes: sildeData[0].notes, title: sildeData[0].title};
       });
   }
 }
@@ -189,6 +197,7 @@ class RunInTerminalSlide {
 
     if (event.fragment.dataset.runInTerminal === 'showCommand') {
       slide.renderCommand();
+      slide.scrollToBottom();
     } else if (event.fragment.dataset.runInTerminal === 'execute') {
       slide.executeCommand();
     }

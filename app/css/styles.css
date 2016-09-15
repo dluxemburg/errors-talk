@@ -1,19 +1,47 @@
+.reveal pre {
+  font-size: 60%;
+}
+
 section {
   height: 100%;
   top: 0;
 }
 
 section[data-run-in-terminal] .container {
-  height: 70%;
+  height: 75%;
   overflow-y: scroll;
 }
 
-section[data-run-in-terminal] em.filename {
+section[data-run-in-terminal] .title {
   float: left;
   font-size: 0.5em;
   color: gray;
   font-family: monospace;
   text-indent: 3em;
+}
+
+section[data-run-in-terminal] .title p {
+  margin: 0px;
+}
+
+
+.big-titles section[data-run-in-terminal] .title {
+  float: left;
+  font-size: 0.75em;
+  color: white;
+  font-family: Helvetica;
+  text-indent: 2.25em;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.big-titles section[data-run-in-terminal] .title strong {
+  font-weight: normal;
+  color: #42AFFA;
 }
 
 section[data-run-in-terminal] pre {
@@ -44,8 +72,8 @@ section[data-run-in-terminal] pre.code span.line:before {
   left: 0;
 }
 
-section[data-run-in-terminal] pre.code strong.added {
-  background-color: rgba(255, 255, 255, 0.2);
+section[data-run-in-terminal] pre.code .added {
+  background-color: #4E4E4E;
 }
 
 section[data-run-in-terminal] pre.term {

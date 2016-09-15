@@ -6,4 +6,5 @@
 
 const fs = require('fs');
 
-fs.createReadStream('hello.txt', 'utf-8').pipe(process.stdout);
+fs.createReadStream('hello.txt', 'utf-8')
+  .pipe(process.stdout);

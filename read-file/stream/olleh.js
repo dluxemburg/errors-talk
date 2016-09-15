@@ -9,9 +9,8 @@ fs.createReadStream(
   'hello.txt', 'utf-8'
 ).pipe(new Transform({
   transform: (chunk, encoding, callback) => {
-    callback(null,
-      `A good greeting: ${chunk.toString().reverse()}`
-    );
+    let backwards = chunk.toString().reverse();
+    callback(null, `A good greeting: ${backwards}`);
   }
 })).on('error', err => {
   console.error(`Whoops! ${err.message}`)

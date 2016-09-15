@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>It's Handled...OR IS IT!?</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+  </head>
+
+  <body>
+    <div class="reveal big-titles">
+      <div class="slides">
+        <section data-background-image="img/handled.gif"></section>
+        <section>
+          <h1>OR IS IT!?</h1>
+        </section>
+
+        <section data-run-in-terminal
+          data-src="code/01-hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/02-does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/03-does-not-exist-worse.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/04-rethrow-does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/05-sync-does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/06-capture-stack-trace.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/read-file.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/07-promise-hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/08-throw-in-a-promise-catch.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/09-promise-double-catch.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/10-promise-throw-after-tick.js"
+          data-language="javascript"
+        ></section>
+
+  <!--         <section data-run-in-terminal
+            data-src="code/11-capture-a-promise-trace.js"
+            data-language="javascript"
+          ></section> -->
+
+        <section data-run-in-terminal
+          data-src="code/12-unhandled-rejection.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/13-unhandled-rejection-then.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/14-unhandled-rejection-catch.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/15-uncaught-exception.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/file-reader.js"
+          data-language="javascript"
+          data-just-code="true"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/16-event-emitter-hello.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/17-event-emitter-does-not-exist.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/18-catch-an-error-event.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/19-events-are-synchronous.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/20-next-tick-error-event.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/21-rejected-error-event.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/22-read-file-stream.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/23-read-file-stream-pipe.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/24-stream-errors.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/25-stream-errors-are-events.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/26-stream-transform.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/27-throw-in-a-stream.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/28-streams-callback-error-events.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/29-streams-dont-propogate-errors.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/30-domains.js"
+          data-language="javascript"
+        ></section>
+
+        <section data-run-in-terminal
+          data-src="code/31-domains-2.js"
+          data-language="javascript"
+        ></section>
+
+        <section class="conclusion">
+          <h2>So...</h2>
+          <ul>
+            <li class="fragment">
+              <span class="blue">Callbacks:</span> It was like this when we found it
+            </li>
+            <li class="fragment">
+              <span class="blue">Promises:</span> Propogation isn't good or bad, just dangerous
+            </li>
+            <li class="fragment">
+              <span class="blue">Events:</span> Are <strong>VERY LOUD</strong>, also synchronous
+            </li>
+            <li class="fragment">
+              <span class="blue">Streams:</span> Pretty nice, pretty niche
+            </li>
+            <li class="fragment">
+              <span class="blue">Domains:</span> Not a thing
+            </li>
+            <li class="fragment">
+              <span class="blue">Zones:</span> <strong>?</strong>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="node_modules/diff/dist/diff.js"></script>
+
+    <script>
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'none',
+
+        dependencies: [
+          { src: 'plugin/run-in-terminal.js', async: true },
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }        ]
+      });
+    </script>
+  </body>
+</html>

@@ -16,14 +16,13 @@
   <body>
     <div class="reveal">
       <div class="slides">
+        <section data-background-image="img/handled.gif"></section>
         <section>
-          <h2>It's Handled..<em>Or Is It!?</em></h2>
-          <h4>(The right tool for the way<br>the job will probably go wrong)</h4>
-          <p>
-            <small><a href="http://dluxemburg.com">Daniel Luxemburg</a> / <a href="http://twitter.com/dluxemburg">@dluxemburg</a></small>
-          </p>
+          <h1>OR IS IT!?</h1>
           <aside class="notes">
-- Going to talk about errors and how to handle them with particular attention about how the asynchronous nature of JavaScript makes that hard (or at least more complicated that it might be in other language)
+- Going to talk about errors
+- Errors get confusing because JavaScript is pretty asynchronously oriented
+- (or at least more complicated that it might be in other language)
 - Going to use Node for examples and talk about a lot of its behavior specifically, but the conclusions should apply for the Browser and elsewhere too
 - Going to stick with what ships with Node. There are a lot of libraries and stuff for this, but that's a lot more than 10 minutes worth of stuff.
           </aside>
@@ -41,18 +40,12 @@
         ></section>
 
         <section data-run-in-terminal
-          data-src="read-file/async/say-hello.js"
-          data-diff-from="read-file/async/hello.js"
-          data-language="javascript"
-        ></section>
-
-        <section data-run-in-terminal
           data-src="read-file/async/say-does-not-exist.js"
           data-diff-from="read-file/async/hello.js"
           data-language="javascript"
         ></section>
 
-        <section data-run-in-terminal
+<!--         <section data-run-in-terminal
           data-src="read-file/sync/does-not-exist.js"
           data-language="javascript"
         ></section>
@@ -72,7 +65,7 @@
           data-src="read-file/sync/does-not-exist-plus-math.js"
           data-diff-from="read-file/sync/does-not-exist.js"
           data-language="javascript"
-        ></section>
+        ></section> -->
 
         <section data-run-in-terminal
           data-src="read-file/async/does-not-exist-rethrow.js"
@@ -118,34 +111,14 @@
                 <td></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Simple?</th>
-                <td><span class="fragment">✅</span></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
           <aside class="notes">
 - We've got callbacks as a way to handle errors that come out of asynchronous behavior
 - ...but they've got these problems with silence and _seemingly_ inaccurate messages
 - ...they're also not composable, resulting in redundant handling
-- ..._but_ they're pretty simple to reason about and pretty fundamental to Node's style
           </aside>
         </section>
-
-        <section data-run-in-terminal
-          data-src="read-file/promise/example.js"
-          data-language="javascript"
-          data-just-code="true"
-        ></section>
-
-        <section data-run-in-terminal
-          data-src="read-file/promise/chained-example.js"
-          data-language="javascript"
-          data-just-code="true"
-        ></section>
 
         <section data-run-in-terminal
           data-src="read-file/promise/read-file.js"
@@ -193,18 +166,18 @@
           data-language="javascript"
         ></section>
 
-        <section data-run-in-terminal
+  <!--       <section data-run-in-terminal
           data-src="read-file/promise/browser-unhandledrejection.js"
           data-language="javascript"
           data-just-code="true"
-        ></section>
+        ></section> -->
 
-        <section data-run-in-terminal
+<!--         <section data-run-in-terminal
           data-src="read-file/promise/does-not-exist-timed-rethrow.js"
           data-diff-from="read-file/promise/does-not-exist-rethrow.js"
           data-language="javascript"
         ></section>
-
+ -->
         <section data-run-in-terminal
           data-src="read-file/promise/hello-hi.js"
           data-language="javascript"
@@ -243,13 +216,6 @@
                 <td></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Simple?</th>
-                <td>✅</td>
-                <td><span class="fragment">❓</span></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
           <aside class="notes">
@@ -257,15 +223,8 @@
 - ...promises give us better errors because they fail us into a "`catch`" block directly instead of letting us wander off to try to do something else in an unexpected state
 - ...but they've still got issues with failing silently unless we're proactive about handling (the global handler isn't really a solution because if your code is being used by someone else they might have their own ideas about what to do at the top level, better to keep things local)
 - ...but they're nicely composable!
-- ...any they're _pretty_ easy to reason about?
           </aside>
         </section>
-
-        <section data-run-in-terminal
-          data-src="read-file/events/example.js"
-          data-language="javascript"
-          data-just-code="true"
-        ></section>
 
         <section data-run-in-terminal
           data-src="read-file/events/file-reader.js"
@@ -333,13 +292,6 @@
                 <td><span class="fragment">❌</span></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Simple?</th>
-                <td>✅</td>
-                <td>❓</td>
-                <td><span class="fragment">❓</span></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
 
@@ -348,7 +300,6 @@
 - ...also give us better errors because, like promises, we're immediately bounced into targeted error handling code
 - ...but unlike promises, if that's not there the error automatically jumps up to the global context so it can't be ignored
 - ...but they're not composable in the way promises are
-- ...and while they might be pretty simple once in place, we do have to do some work to write them up that's a bit more involved than with promises, especially in more complicated cases
           </aside>
         </section>
 
@@ -368,10 +319,10 @@
           data-language="javascript"
         ></section>
 
-        <section data-run-in-terminal
+<!--         <section data-run-in-terminal
           data-src="read-file/stream/does-not-exist-pipe-plus-math.js"
           data-language="javascript"
-        ></section>
+        ></section> -->
 
         <section data-run-in-terminal
           data-src="read-file/stream/does-not-exist-pipe-log.js"
@@ -428,13 +379,6 @@
                 <td>❌</td>
                 <td><span class="fragment">❓</span></td>
               </tr>
-              <tr>
-                <th>Simple?</th>
-                <td>✅</td>
-                <td>❓</td>
-                <td>❓</td>
-                <td><span class="fragment">❌</span></td>
-              </tr>
             </tbody>
           </table>
 
@@ -443,7 +387,6 @@
 - ...also give us better errors, for the same reason as events
 - ...also give us loud errors, for the same reason as events
 - ...but they're composable in a way that events are not, but only in cases when we're working with other streams and maybe not as much as promises
-- ...and they're probably more complicated than events and while not too difficult to reason about, probably the most difficult of the ones we've looked at
           </aside>
         </section>
 
@@ -451,13 +394,11 @@
           <h2>So...</h2>
           <ul>
             <li class="fragment">
-              <strong><span class="blue">Callbacks:</span> Most adaptable</strong>—good when errors will need different handling depending on context, e.g. library code
-              <ul><li>(Don't use `-Sync` methods)</li></ul>
+              <strong><span class="blue">Callbacks:</span> Most adaptable</strong>—good when handling depends on context
             </li>
             <br>
             <li class="fragment">
-              <strong><span class="blue">Promises:</span> Most composable</strong>—good when errors from a sequence of steps should/can be handled in aggregate, e.g. application business logic
-              <ul><li>(Don't use global handler)</li></ul>
+              <strong><span class="blue">Promises:</span> Most composable</strong>—good when errors from steps can be aggregated
             </li>
           </ul>
         </section>
@@ -465,11 +406,11 @@
           <h2>And then but so...</h2>
           <ul>
             <li class="fragment">
-              <strong><span class="blue">Events:</span> Most loud</strong>—good when errors in one component need to notify another and should crash if unhandled, e.g. a web server
+              <strong><span class="blue">Events:</span> Most loud</strong>—good when things should blow up if an error isn't handled
             </li>
             <br>
             <li class="fragment">
-              <strong><span class="blue">Streams:</span> Most niche</strong>—good in similar cases as events, but when errors should be propogated through steps in a pipeline
+              <strong><span class="blue">Streams:</span> Most niche</strong>—like events but with an interface for combining
             </li>
           </ul>
         </section>
