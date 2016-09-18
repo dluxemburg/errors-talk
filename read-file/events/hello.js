@@ -1,3 +1,7 @@
+/*=notes
+- Works as expected
+*/
+
 const FileReader = require('./file-reader');
 
 let reader = new FileReader();

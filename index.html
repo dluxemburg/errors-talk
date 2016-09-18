@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css" id="theme">
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="plugin/reveal-run-in-terminal.css" />
     <link rel="stylesheet" href="lib/css/zenburn.css">
   </head>
 
@@ -20,27 +20,19 @@
         <section>
           <h1>OR IS IT!?</h1>
           <aside class="notes">
-- Going to talk about errors
-- Errors get confusing because JavaScript is pretty asynchronously oriented
-- (or at least more complicated that it might be in other language)
-- Going to use Node for examples and talk about a lot of its behavior specifically, but the conclusions should apply for the Browser and elsewhere too
-- Going to stick with what ships with Node. There are a lot of libraries and stuff for this, but that's a lot more than 10 minutes worth of stuff.
+- Errors get confusing because JavaScript is _pretty_ asynchronous
+- (or at least more confusing that it might be in other language)
           </aside>
         </section>
 
-        <section data-run-in-terminal
-          data-src="read-file/async/hello.js"
-          data-language="javascript"
-        ></section>
+        <section data-run-in-terminal="read-file/async/hello.js"></section>
 
-        <section data-run-in-terminal
-          data-src="read-file/async/does-not-exist.js"
+        <section data-run-in-terminal="read-file/async/does-not-exist.js"
           data-diff-from="read-file/async/hello.js"
           data-language="javascript"
         ></section>
 
-        <section data-run-in-terminal
-          data-src="read-file/async/say-does-not-exist.js"
+        <section data-run-in-terminal="read-file/async/say-does-not-exist.js"
           data-diff-from="read-file/async/hello.js"
           data-language="javascript"
         ></section>
@@ -67,17 +59,12 @@
           data-language="javascript"
         ></section> -->
 
-        <section data-run-in-terminal
+<!--         <section data-run-in-terminal
           data-src="read-file/async/does-not-exist-rethrow.js"
           data-diff-from="read-file/async/does-not-exist.js"
           data-language="javascript"
         ></section>
-
-        <section data-run-in-terminal
-          data-src="read-file/async/hello-hi.js"
-          data-language="javascript"
-        ></section>
-
+ -->
         <section class="report">
           <table>
             <thead>
@@ -104,23 +91,17 @@
                 <td></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Composable?</th>
-                <td><span class="fragment">❌</span></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
           <aside class="notes">
 - We've got callbacks as a way to handle errors that come out of asynchronous behavior
-- ...but they've got these problems with silence and _seemingly_ inaccurate messages
+- ...but they've got problems with _seemingly_ inaccurate messages
+- ...and silent failures
 - ...they're also not composable, resulting in redundant handling
           </aside>
         </section>
 
-        <section data-run-in-terminal
+      <!--   <section data-run-in-terminal
           data-src="read-file/promise/read-file.js"
           data-language="javascript"
           data-just-code="true"
@@ -165,7 +146,7 @@
           data-diff-from="read-file/promise/does-not-exist.js"
           data-language="javascript"
         ></section>
-
+ -->
   <!--       <section data-run-in-terminal
           data-src="read-file/promise/browser-unhandledrejection.js"
           data-language="javascript"
@@ -178,11 +159,6 @@
           data-language="javascript"
         ></section>
  -->
-        <section data-run-in-terminal
-          data-src="read-file/promise/hello-hi.js"
-          data-language="javascript"
-        ></section>
-
         <section class="report">
           <table>
             <thead>
@@ -209,24 +185,19 @@
                 <td></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Composable?</th>
-                <td>❌</td>
-                <td><span class="fragment">✅</span></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
           <aside class="notes">
 - As compared with callbacks...
-- ...promises give us better errors because they fail us into a "`catch`" block directly instead of letting us wander off to try to do something else in an unexpected state
-- ...but they've still got issues with failing silently unless we're proactive about handling (the global handler isn't really a solution because if your code is being used by someone else they might have their own ideas about what to do at the top level, better to keep things local)
+- ...promises give us better errors because they drop us into a "`catch`" block immediately instead of letting us wander off to try to do something else in an unexpected state
+- ...but they've still got issues with failing silently unless we're proactive about handling
+- (it's a different type of silent failure, true, but still bad!)
+- (the global handler isn't really a solution because if your code is being used by someone else they might have their own ideas about what to do at the top level, better to keep things local)
 - ...but they're nicely composable!
           </aside>
         </section>
 
-        <section data-run-in-terminal
+        <!-- <section data-run-in-terminal
           data-src="read-file/events/file-reader.js"
           data-language="javascript"
           data-just-code="true"
@@ -252,12 +223,7 @@
         <section data-run-in-terminal
           data-src="read-file/events/olleh.js"
           data-diff-from="read-file/events/does-not-exist-handled.js"
-        ></section>
-
-        <section data-run-in-terminal
-          data-src="read-file/events/hello-hi.js"
-          data-language="javascript"
-        ></section>
+        ></section> -->
 
         <section class="report">
           <table>
@@ -285,25 +251,18 @@
                 <td><span class="fragment">✅</span></td>
                 <td></td>
               </tr>
-              <tr>
-                <th>Composable?</th>
-                <td>❌</td>
-                <td>✅</td>
-                <td><span class="fragment">❌</span></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
 
           <aside class="notes">
 - So events...
 - ...also give us better errors because, like promises, we're immediately bounced into targeted error handling code
-- ...but unlike promises, if that's not there the error automatically jumps up to the global context so it can't be ignored
-- ...but they're not composable in the way promises are
+- ...but unlike promises, if that handlier isn't there the error automatically jumps up to the global context so it can't be ignored
+- ...but they're not composable in the way promises are - we don't get to collect errors from different chuncks of code (event if we can do things in parallel)
           </aside>
         </section>
 
-        <section data-run-in-terminal
+        <!-- <section data-run-in-terminal
           data-src="read-file/stream/hello-event.js"
           data-language="javascript"
         ></section>
@@ -317,14 +276,14 @@
         <section data-run-in-terminal
           data-src="read-file/stream/hello-pipe.js"
           data-language="javascript"
-        ></section>
+        ></section> -->
 
 <!--         <section data-run-in-terminal
           data-src="read-file/stream/does-not-exist-pipe-plus-math.js"
           data-language="javascript"
         ></section> -->
 
-        <section data-run-in-terminal
+        <!-- <section data-run-in-terminal
           data-src="read-file/stream/does-not-exist-pipe-log.js"
           data-language="javascript"
         ></section>
@@ -345,51 +304,7 @@
           data-diff-from="read-file/stream/hello-transform.js"
           data-language="javascript"
         ></section>
-
-        <section class="report">
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Callbacks</th>
-                <th>Promises</th>
-                <th>Events</th>
-                <th>Streams</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Good Errors?</th>
-                <td>❌</td>
-                <td>✅</td>
-                <td>✅</td>
-                <td><span class="fragment">✅</span></td>
-              </tr>
-              <tr>
-                <th>Loud Failures?</th>
-                <td>❌</td>
-                <td>❌</td>
-                <td>✅</td>
-                <td><span class="fragment">✅</span></td>
-              </tr>
-              <tr>
-                <th>Composable?</th>
-                <td>❌</td>
-                <td>✅</td>
-                <td>❌</td>
-                <td><span class="fragment">❓</span></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <aside class="notes">
-- So streams...
-- ...also give us better errors, for the same reason as events
-- ...also give us loud errors, for the same reason as events
-- ...but they're composable in a way that events are not, but only in cases when we're working with other streams and maybe not as much as promises
-          </aside>
-        </section>
-
+ -->
         <section class="conclusion">
           <h2>So...</h2>
           <ul>
@@ -416,6 +331,12 @@
         </section>
 
         <section><h1>Maybe?</h1></section>
+        <section><h1>Bonus!</h1></section>
+
+        <section data-run-in-terminal
+          data-src="read-file/bonus/domains.js"
+          data-language="javascript"
+        ></section>
       </div>
     </div>
 
@@ -432,7 +353,9 @@
         transition: 'none',
 
         dependencies: [
-          { src: 'plugin/run-in-terminal.js', async: true },
+          { src: 'plugin/reveal-run-in-terminal.js', async: true, callback: function() {
+            RunInTerminal.init({defaultBin: 'node'});
+          } },
           { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },

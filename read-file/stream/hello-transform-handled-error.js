@@ -8,7 +8,7 @@ const Transform = require('stream').Transform;
 fs.createReadStream(
   'hello.txt', 'utf-8'
 ).pipe(new Transform({
-  transform: (chunk, encoding, callback) => {
+  transform(chunk, encoding, callback) {
     if (chunk.toString().length > 4) {
       return callback(new Error('Bad greeting: too long'));
     }

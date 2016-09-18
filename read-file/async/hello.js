@@ -1,5 +1,5 @@
 /*=notes
-- Read from a file and write it to standard out
+- We're working in Node and want to read from a file and write it to standard out
 
 > Let's say we want to read something from a file and write it to standard out, just for fun **[RUN]**
 

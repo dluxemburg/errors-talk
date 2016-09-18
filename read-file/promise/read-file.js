@@ -1,6 +1,6 @@
 /*=notes
 - So let's build a promise generating function out of the callback-based `readFile` method
-- Libraries to do it for you (and some that use promises as their interface)
+- Libraries to do it for you (and some that use promises as their interface) — we're sticking with what ships with Node because 10 minutes
 */
 
 const fs = require('fs');

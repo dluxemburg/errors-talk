@@ -1,5 +1,5 @@
 /*=notes
-- But we're still able to do more than one thing at once **[RUN]**
+- But...at least we're still able to do more than one thing at once **[RUN]**
 */
 
 const FileReader = require('./file-reader');

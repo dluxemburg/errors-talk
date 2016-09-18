@@ -1,8 +1,7 @@
 /*=notes
-- This doesn't scale, it's clear how this could get out of hand
 - So while this works **[RUN]**...
-- ...it doesn't support _composable_ error-handled code
-- (Also, we could be reading both files at the same time _but how!?_)
+- ...it demonstrates how this could easily get out of hand
+- So, one more problem: repetitive handling (because we can combine error handling)
 */
 
 const fs = require('fs');

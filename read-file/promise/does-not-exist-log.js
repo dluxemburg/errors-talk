@@ -1,3 +1,7 @@
+/*=notes
+- What is going on?
+*/
+
 const readFile = require('./read-file');
 
 readFile('does-not-exist.txt', 'utf-8').then(data => {

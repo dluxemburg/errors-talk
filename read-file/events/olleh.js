@@ -1,3 +1,6 @@
+/*=notes
+- But we _don't_ get the kind of catch-whatever-you-throw-at-it behavior of promises
+*/
 const FileReader = require('./file-reader');
 
 let reader = new FileReader();

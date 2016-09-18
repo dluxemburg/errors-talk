@@ -1,3 +1,6 @@
+/*=notes
+- It goes to the _next_ catch
+*/
 const readFile = require('./read-file');
 
 readFile('does-not-exist.txt', 'utf-8').then(data => {

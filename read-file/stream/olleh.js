@@ -8,7 +8,7 @@ const Transform = require('stream').Transform;
 fs.createReadStream(
   'hello.txt', 'utf-8'
 ).pipe(new Transform({
-  transform: (chunk, encoding, callback) => {
+  transform(chunk, encoding, callback) {
     let backwards = chunk.toString().reverse();
     callback(null, `A good greeting: ${backwards}`);
   }

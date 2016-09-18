@@ -1,5 +1,5 @@
 /*=notes
-- So much like promises, we can wrap the basic "`fs.readFile`" method to expose its error behavior this way
+- So, much like promises, we can wrap the basic "`fs.readFile`" method to expose its error behavior this way
 */
 
 const EventEmitter = require('events');

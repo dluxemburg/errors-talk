@@ -1,5 +1,6 @@
 /*=notes
-- Well, the fact that any time something goes wrong we jump to the next catch block means we can cover a lot of code with one handler, which we couldn't do before
+- This is great!
+- We can cover a lot of code with one handler, which we couldn't do before
 */
 
 const readFile = require('./read-file');
